@@ -10,26 +10,16 @@
 #include <cstdio>
 #include "GF256.hpp"
 #include "GF257.hpp"
+#include "ECC.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    gf256_table_init();
-    gf257_table_init();
+    unsigned char m[] = {1,2,3};
 
-    for (int i = 0; i < 257; i++) {
-        printf("%d ", gf257_exp_table[i]);
-        if ((i+1)%16 == 0)
-            printf("\n");
-    }
+    int n = 9;
+    unsigned char* c = DFT_encoding(m, 3, n);
+    printf("%x %x %x %x %x", c[0], c[1], c[2], c[3], c[9]);
     
-    cout << endl << endl;
-    for (int i = 0; i < 257; i++) {
-        printf("%d ", gf257_log_table[i]);
-        if ((i+1)%16 == 0)
-            printf("\n");
-    }
-    
-    printf("\n\n%d\n", gf257_addinv(32));
     return 0;
 }

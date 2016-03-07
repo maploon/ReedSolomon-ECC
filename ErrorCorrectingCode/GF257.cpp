@@ -56,7 +56,8 @@ unsigned int gf257_mult(unsigned int x, unsigned int y){
         gf257_table_init();
         gf257_table_initialized = true;
     }
-    
+    if (x == 0x0 || y ==0x0) return 0x0;
+
     return gf257_exp_table[(gf257_log_table[x] + gf257_log_table[y])%256];
 }
 

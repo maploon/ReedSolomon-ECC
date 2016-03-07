@@ -48,7 +48,7 @@ void gf256_table_init(){
     for (unsigned int i = 0x01; i < 0x100; i++){
         gf256_exp_table[i] = gf256_mult_basic(gf256_gen, gf256_exp_table[i-1]);
     }
-    for (unsigned int i = 0x00; i < 0x100; i++) {
+    for (unsigned int i = 0x00; i < 0xff; i++) {
         gf256_log_table[gf256_exp_table[i]] = i;
     }
 }
@@ -78,8 +78,9 @@ unsigned char gf256_mult(unsigned char x, unsigned char y){
         gf256_table_init();
         gf256_table_initialized = true;
     }
+    if (x == 0x0 || y == 0x0) return 0x0;
     
-    return gf256_exp_table[gf256_log_table[x] + gf256_log_table[y]];
+    return gf256_exp_table[gf256_add(gf256_log_table[x], gf256_log_table[y])];
 }
 
 /* Division on GF(256) */
@@ -90,7 +91,7 @@ unsigned char gf256_div(unsigned char x, unsigned char y){
     }
     
     
-    return gf256_exp_table[gf256_log_table[x] - gf256_log_table[y]];
+    return gf256_exp_table[(unsigned char)(gf256_log_table[x] - gf256_log_table[y])];
 }
 
 /* Additive inverse */
@@ -105,5 +106,5 @@ unsigned char gf256_multinv(unsigned char x){
         gf256_table_initialized = true;
     }
     
-    return gf256_exp_table[-gf256_log_table[x]];
+    return gf256_exp_table[(unsigned char)(-gf256_log_table[x])];
 }
