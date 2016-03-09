@@ -14,6 +14,7 @@
 extern unsigned char gf256_gen;
 extern unsigned char gf256_exp_table[256], gf256_log_table[256];
 extern unsigned int gf256_irred;
+extern bool gf256_table_initialized;
 
 void gf256_table_init();
 unsigned char gf256_add(unsigned char x, unsigned char y);

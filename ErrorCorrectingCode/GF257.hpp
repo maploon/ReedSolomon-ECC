@@ -13,6 +13,7 @@
 
 extern unsigned int gf257_gen;
 extern unsigned int gf257_exp_table[257], gf257_log_table[257];
+extern bool gf257_table_initialized;
 
 void gf257_table_init();
 unsigned int gf257_add(unsigned int x, unsigned int y);

@@ -23,12 +23,14 @@ unsigned char* DFT_encoding(unsigned char* m, int k, int n){
     }
     
     unsigned char* c = new unsigned char[n];
-    gf256_table_init();
+    if (!gf256_table_initialized){
+        gf256_table_init();
+    }
     
     for (int i = 0; i<n; i++) {
         c[i] = 0x0;
         for (int j = 0; j < k; j++) {
-            unsigned char increment = gf256_mult(m[j], gf256_exp_table[gf256_mult(i, j)]);
+            unsigned char increment = gf256_mult(m[j], gf256_exp_table[(i*j)%255]);
             c[i] = gf256_add(c[i], increment);
         }
     }
@@ -38,6 +40,11 @@ unsigned char* DFT_encoding(unsigned char* m, int k, int n){
 
 unsigned int* FFT_encoding(unsigned int* m, int k){
     // send to recursive FFT
+    
+    if (!gf257_table_initialized){
+        gf257_table_init();
+    }
+    
     unsigned int* msg = new unsigned int[256];
     memset(msg, 0, 256);
     for(int i = 0 ; i < k; i++) {
@@ -51,5 +58,29 @@ unsigned int* FFT_encoding(unsigned int* m, int k){
 
 unsigned int* recursive_FFT(unsigned int* m, int n){
     
-    return 0;
+    if (n == 1)
+        return m;
+    
+    unsigned int omega_n = gf257_exp_table[256/n];
+    unsigned int omega = 1;
+    
+    unsigned int* even = new unsigned int[n/2];
+    unsigned int* odd  = new unsigned int[n/2];
+    
+    for (int i = 0; i < n/2; i++) {
+        even[i] = m[2*i];
+        odd[i] = m[2*i+1];
+    }
+    
+    unsigned int* even_fft = recursive_FFT(even, n/2);
+    unsigned int* odd_fft = recursive_FFT(odd, n/2);
+
+    unsigned int* fft = new unsigned int[n];
+    for (int k = 0; k < n/2; k++) {
+        fft[k] = gf257_add(even_fft[k], gf257_mult(omega, odd_fft[k]));
+        fft[k+n/2] = gf257_add(even_fft[k], gf257_addinv(gf257_mult(omega, odd_fft[k])));
+        omega = gf257_mult(omega, omega_n);
+    }
+    
+    return fft;
 }

@@ -74,7 +74,7 @@ unsigned int gf257_div(unsigned int x, unsigned int y){
 
 /* Additive inverse */
 unsigned int gf257_addinv(unsigned int x){
-    return (~x)%257;
+    return 257-x;
 }
 
 /* Multiplicative inverse */
