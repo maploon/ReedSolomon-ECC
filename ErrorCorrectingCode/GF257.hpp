@@ -22,7 +22,6 @@ unsigned int gf257_mult(unsigned int x, unsigned int y);
 unsigned int gf257_div(unsigned int x, unsigned int y);
 unsigned int gf257_addinv(unsigned int x);
 unsigned int gf257_multinv(unsigned int x);
-
 unsigned int* gf257_gauss(unsigned int** A, int n);
 
 

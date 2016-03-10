@@ -94,7 +94,7 @@ unsigned int gf256_div(unsigned int x, unsigned int y){
     if(gf256_log_table[x] > gf256_log_table[y])
         return gf256_exp_table[gf256_log_table[x] - gf256_log_table[y]];
     else
-        return gf256_exp_table[gf256_log_table[x] +255- gf256_log_table[y]];
+        return gf256_exp_table[gf256_log_table[x] + 255- gf256_log_table[y]];
 }
 
 /* Additive inverse */
