@@ -11,17 +11,17 @@
 
 #include <stdio.h>
 
-extern unsigned char gf256_gen;
-extern unsigned char gf256_exp_table[256], gf256_log_table[256];
+extern unsigned int gf256_gen;
+extern unsigned int gf256_exp_table[256], gf256_log_table[256];
 extern unsigned int gf256_irred;
 extern bool gf256_table_initialized;
 
 void gf256_table_init();
-unsigned char gf256_add(unsigned char x, unsigned char y);
-unsigned char gf256_mult_basic(unsigned char x, unsigned char y);
-unsigned char gf256_mult(unsigned char x, unsigned char y);
-unsigned char gf256_div(unsigned char x, unsigned char y);
-unsigned char gf256_addinv(unsigned char x);
-unsigned char gf256_multinv(unsigned char x);
+unsigned int gf256_add(unsigned int x, unsigned int y);
+unsigned int gf256_mult_basic(unsigned int x, unsigned int y);
+unsigned int gf256_mult(unsigned int x, unsigned int y);
+unsigned int gf256_div(unsigned int x, unsigned int y);
+unsigned int gf256_addinv(unsigned int x);
+unsigned int gf256_multinv(unsigned int x);
 
 #endif /* GF256_hpp */

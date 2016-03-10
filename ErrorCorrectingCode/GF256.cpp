@@ -31,13 +31,13 @@
 using namespace std;
 
 /* Generator of GF(256) */
-unsigned char gf256_gen = 0x03;
+unsigned int gf256_gen = 0x03;
 
 /* Irreducible polynomial for GF(256), i.e. x^8+x^4+x^3+x+1 */
 unsigned int gf256_irred = 0x11b;
 
 /* Exponent and Logarithm table*/
-unsigned char gf256_exp_table[256], gf256_log_table[256];
+unsigned int gf256_exp_table[256], gf256_log_table[256];
 
 bool gf256_table_initialized = false;
 
@@ -54,12 +54,12 @@ void gf256_table_init(){
 }
 
 /* Addition on field GF(256) */
-unsigned char gf256_add(unsigned char x, unsigned char y){
+unsigned int gf256_add(unsigned int x, unsigned int y){
     return x^y;
 }
 
-unsigned char gf256_mult_basic(unsigned char x, unsigned char y) {
-    unsigned char a = x, b = y, c = 0, t;
+unsigned int gf256_mult_basic(unsigned int x, unsigned int y) {
+    unsigned int a = x, b = y, c = 0, t;
     while (a != 0) {
         if ((a & 1) != 0)
             c = c ^ b;
@@ -69,11 +69,11 @@ unsigned char gf256_mult_basic(unsigned char x, unsigned char y) {
             b = b ^ 0x1b;
         a = a >> 1;
     }
-    return c;
+    return (c&0xff);
 }
 
 /* Multiplication on GF(256) */
-unsigned char gf256_mult(unsigned char x, unsigned char y){
+unsigned int gf256_mult(unsigned int x, unsigned int y){
     if (!gf256_table_initialized) {
         gf256_table_init();
         gf256_table_initialized = true;
@@ -84,7 +84,7 @@ unsigned char gf256_mult(unsigned char x, unsigned char y){
 }
 
 /* Division on GF(256) */
-unsigned char gf256_div(unsigned char x, unsigned char y){
+unsigned int gf256_div(unsigned int x, unsigned int y){
     if (!gf256_table_initialized) {
         gf256_table_init();
         gf256_table_initialized = true;
@@ -98,12 +98,12 @@ unsigned char gf256_div(unsigned char x, unsigned char y){
 }
 
 /* Additive inverse */
-unsigned char gf256_addinv(unsigned char x){
+unsigned int gf256_addinv(unsigned int x){
     return x;
 }
 
 /* Multiplicative inverse */
-unsigned char gf256_multinv(unsigned char x){
+unsigned int gf256_multinv(unsigned int x){
     if (!gf256_table_initialized) {
         gf256_table_init();
         gf256_table_initialized = true;

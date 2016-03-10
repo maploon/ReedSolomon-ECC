@@ -11,8 +11,9 @@
 
 #include <stdio.h>
 
-unsigned char* DFT_encoding(unsigned char* m,int k, int n);
+unsigned int* DFT_encoding(unsigned int* m,int k, int n);
 unsigned int* FFT_encoding(unsigned int* m, int k);
 unsigned int* recursive_FFT(unsigned int* m, int n);
-
+unsigned int* gf256_decode(unsigned int* c, int k, int n);
+unsigned int* gf256_gauss(unsigned int** A, int n);
 #endif /* ECC_hpp */
