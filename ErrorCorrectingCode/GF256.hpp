@@ -23,5 +23,6 @@ unsigned int gf256_mult(unsigned int x, unsigned int y);
 unsigned int gf256_div(unsigned int x, unsigned int y);
 unsigned int gf256_addinv(unsigned int x);
 unsigned int gf256_multinv(unsigned int x);
+unsigned int* gf256_gauss(unsigned int** A, int n);
 
 #endif /* GF256_hpp */

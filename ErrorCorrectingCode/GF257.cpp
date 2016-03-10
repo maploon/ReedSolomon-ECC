@@ -69,7 +69,10 @@ unsigned int gf257_div(unsigned int x, unsigned int y){
     }
     
     
-    return gf257_exp_table[(gf257_log_table[x] - gf257_log_table[y])%256];
+    if(gf257_log_table[x] > gf257_log_table[y])
+        return gf257_exp_table[gf257_log_table[x] - gf257_log_table[y]];
+    else
+        return gf257_exp_table[gf257_log_table[x] +256 - gf257_log_table[y]];
 }
 
 /* Additive inverse */
@@ -84,5 +87,51 @@ unsigned int gf257_multinv(unsigned int x){
         gf257_table_initialized = true;
     }
     
-    return gf257_exp_table[(-gf257_log_table[x])%256];
+    return gf257_exp_table[(-gf257_log_table[x])%257];
+}
+
+unsigned int* gf257_gauss(unsigned int** A, int n) {
+    //    int n = A.size();
+    
+    for (int i=0; i<n; i++) {
+        // Search for maximum in this column
+        unsigned int maxEl = A[i][i];
+        int maxRow = i;
+        for (int k=i+1; k<n; k++) {
+            if (A[k][i] > maxEl) {
+                maxEl = A[k][i];
+                maxRow = k;
+            }
+        }
+        
+        // Swap maximum row with current row (column by column)
+        for (int k=i; k<n+1;k++) {
+            unsigned int tmp = A[maxRow][k];
+            A[maxRow][k] = A[i][k];
+            A[i][k] = tmp;
+        }
+        
+        // Make all rows below this one 0 in current column
+        for (int k=i+1; k<n; k++) {
+            unsigned int c = gf257_addinv(gf257_div(A[k][i], A[i][i]));
+            for (int j=i; j<n+1; j++) {
+                if (i==j) {
+                    A[k][j] = 0;
+                } else {
+                    A[k][j] = gf257_add(A[k][j], gf257_mult(c, A[i][j]));
+                }
+            }
+        }
+    }
+    
+    // Solve equation Ax=b for an upper triangular matrix A
+    
+    unsigned int* x = new unsigned int[n];
+    for (int i=n-1; i>=0; i--) {
+        x[i] = gf257_div(A[i][n],A[i][i]);
+        for (int k=i-1;k>=0; k--) {
+            A[k][n] = gf257_add(A[k][n],gf257_addinv(gf257_mult(A[k][i], x[i])));
+        }
+    }
+    return x;
 }
