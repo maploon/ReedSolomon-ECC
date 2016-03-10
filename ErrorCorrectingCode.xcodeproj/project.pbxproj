@@ -28,13 +28,13 @@
 
 /* Begin PBXFileReference section */
 		B29AB9F71C9135C3002F8E97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B29AB9F91C914677002F8E97 /* Sample Input and Output */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Sample Input and Output"; sourceTree = "<group>"; };
 		B2B277A21C8B8C380041A572 /* GF256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GF256.cpp; sourceTree = "<group>"; };
 		B2B277A31C8B8C380041A572 /* GF256.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GF256.hpp; sourceTree = "<group>"; };
 		B2B277A51C8BAFC50041A572 /* GF257.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GF257.cpp; sourceTree = "<group>"; };
 		B2B277A61C8BAFC50041A572 /* GF257.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GF257.hpp; sourceTree = "<group>"; };
 		B2B277AB1C8D04F80041A572 /* ECC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ECC.cpp; sourceTree = "<group>"; };
 		B2B277AC1C8D04F80041A572 /* ECC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ECC.hpp; sourceTree = "<group>"; };
+		B2B705691C91491900871551 /* Sample Inputs and Outputs */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sample Inputs and Outputs"; sourceTree = "<group>"; };
 		B2C7C4B31C8B8B72001B2467 /* ErrorCorrectingCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ErrorCorrectingCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C7C4B61C8B8B72001B2467 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,10 +69,10 @@
 		B2C7C4B51C8B8B72001B2467 /* ErrorCorrectingCode */ = {
 			isa = PBXGroup;
 			children = (
+				B2B705691C91491900871551 /* Sample Inputs and Outputs */,
 				B2B277AB1C8D04F80041A572 /* ECC.cpp */,
 				B2B277AC1C8D04F80041A572 /* ECC.hpp */,
 				B2C7C4B61C8B8B72001B2467 /* main.cpp */,
-				B29AB9F91C914677002F8E97 /* Sample Input and Output */,
 				B29AB9F71C9135C3002F8E97 /* README.md */,
 				B2B277A51C8BAFC50041A572 /* GF257.cpp */,
 				B2B277A61C8BAFC50041A572 /* GF257.hpp */,
